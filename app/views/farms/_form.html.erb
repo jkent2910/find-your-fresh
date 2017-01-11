@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="col-md-12">
+      <%= form_for (@farm), :html => {multipart: true} do |f| %>
+
+          <% if @farm.errors.any? %>
+              <ul>
+
+                <% @farm.errors.full_messages.each do |m| %>
+                    <li><%= m %></li>
+                <% end %>
+              </ul>
+
+          <% end %>
+
+          <div class="form-group">
+            <%= f.label :name %><br/>
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :street_address %><br/>
+            <%= f.text_field :street_address, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :city %><br/>
+            <%= f.text_field :city, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :state %><br/>
+            <%= f.select :state, options_for_select(us_states, selected: f.object.state), {include_blank: true}, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :zipcode %><br/>
+            <%= f.text_field :zipcode, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :description %><br/>
+            <%= f.text_area :description, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :year_founded %><br/>
+            <%= f.select :year_founded, options_for_select(1900..2017, selected: f.object.year_founded), {include_blank: true}, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :website_url %><br/>
+            <%= f.text_field :website_url, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :contact_email %><br/>
+            <%= f.text_field :contact_email, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :contact_phone %><br/>
+            <%= f.text_field :contact_phone, class: "form-control" %>
+          </div>
+
+          <%= f.submit class: 'btn btn-md btn-primary' %>
+
+
+      <% end %>
+  </div>
+</div>

@@ -21,6 +21,13 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
+    <label class="radio-inline">
+      <%= f.radio_button(:user_type, "farmer") %> I'm a Farmer
+    </label>
+    <label class="radio-inline">
+      <%= f.radio_button(:user_type, "consumer") %>I'm a Consumer
+    </label><br />
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

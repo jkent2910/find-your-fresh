@@ -7,5 +7,6 @@ class User < ActiveRecord::Base
   enum user_type: { farmer: 1, consumer: 2 }
 
   validates_presence_of :user_type
-  
+
+  has_one :farm
 end
