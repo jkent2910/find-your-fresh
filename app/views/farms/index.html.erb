@@ -1,0 +1,5 @@
+<div class="container">
+  <% @farms.each do |f| %> <br />
+      <%= link_to f.name, farm_path(f) %>
+  <% end %>
+</div>
