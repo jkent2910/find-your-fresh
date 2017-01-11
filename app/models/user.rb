@@ -5,4 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   enum user_type: { farmer: 1, consumer: 2 }
+
+  validates_presence_of :user_type
+  
 end
