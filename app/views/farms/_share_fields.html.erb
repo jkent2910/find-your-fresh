@@ -56,5 +56,14 @@
     </label>
   </div>
 
+  <div class="form-group">
+    Vegetables:
+    <% vegetables.each do |k| %>
+      <%= check_box_tag 'share[vegetables[]', k, f.object.vegetables.include?(k) %>
+      <%= hidden_field_tag 'share_id', f.object.id %>
+      <%= "#{k}" %><br />
+    <% end %>
+  </div>
+
   <%= link_to_remove_association "Remove CSA Share", f, class: "btn btn-danger" %><br /><br />
 </div>

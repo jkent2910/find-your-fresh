@@ -26,6 +26,15 @@ def create_farm_profile(user_id)
                           state: Faker::Address.state, zipcode: Faker::Address.zip, description: Faker::Lorem.paragraph(2))
 
   p "creating farm #{farm.name}"
+  create_csa_share(farm.id)
+end
+
+def create_csa_share(farm_id)
+  Share.create!(farm_id: farm_id, season: ["Spring", "Fall", "Winter", "Summer"].sample, start_date: Faker::Date.forward(360),
+                end_date: Faker::Date.forward(360), weeks: [10..25].sample, price: ["100", "200", "300", "400"].sample,
+                organic: [true, false].sample, taking_orders: [true, false].sample, vegetables: ["Broccoli", "Asparagus"])
+
+  AddOn.create!(farm_id: farm_id, item: ["Honey", "Eggs", "Milk"].sample, price: ["10", "20", "30"].sample)
 end
 
 create_farms

@@ -36,10 +36,17 @@ class FarmsController < ApplicationController
     respond_to do |format|
       if @farm.update(farm_params)
 
+        # Build photos
         if params[:images]
           params[:images].each { |image|
             @farm.farm_photos.create(image: image)
           }
+        end
+
+        # Build vegetables
+        if params[:share][:vegetables]
+          share = Share.find(params[:share_id])
+          share.update_attributes(vegetables: params[:share][:vegetables])
         end
 
 
@@ -75,8 +82,9 @@ class FarmsController < ApplicationController
 
   def farm_params
     params.require(:farm).permit(:name, :street_address, :city, :state, :zipcode, :description, :year_founded,
-                                  :website_url, :contact_email, :contact_phone, shares_attributes: [:id, :season,
-                                  :start_date, :end_date, :weeks, :price, :description, :num_shares, :organic, :taking_orders])
+                                  :website_url, :contact_email, :contact_phone, shares_attributes: [:id, :_destroy, :season,
+                                  :start_date, :end_date, :weeks, :price, :description, :num_shares, :organic, :taking_orders,
+                                  vegetables: []], add_ons_attributes: [:id, :item, :description, :price, :_destroy])
   end
 
 end

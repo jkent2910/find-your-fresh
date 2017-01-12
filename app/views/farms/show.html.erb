@@ -19,4 +19,23 @@
         </div>
       </div>
   <% end %>
+
+  <% @farm.shares.each do |share| %>
+  <%= share.season %><br />
+  <%= share.start_date %><br />
+  <%= share.end_date %><br />
+  <%= share.weeks %><br />
+  <%= share.price %><br />
+  <%= share.description %><br />
+  <%= share.num_shares %><br />
+  <%= share.organic %><br />
+  <%= share.taking_orders %><br />
+  <%= share.vegetables %><br />
+  <% end %>
+
+  <% @farm.add_ons.each do |a| %>
+    <%= a.item %> <br />
+    <%= a.price %> <br />
+    <%= a.description %>
+  <% end %>
 </div>

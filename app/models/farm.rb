@@ -8,4 +8,7 @@ class Farm < ActiveRecord::Base
   has_many :shares, :dependent => :destroy
   accepts_nested_attributes_for :shares, reject_if: :all_blank, allow_destroy: true
 
+  has_many :add_ons, :dependent => :destroy
+  accepts_nested_attributes_for :add_ons, reject_if: :all_blank, allow_destroy: true
+
 end

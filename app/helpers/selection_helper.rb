@@ -55,4 +55,48 @@ module SelectionHelper
         'Wyoming'
     ]
   end
+
+  def vegetables
+    [
+     'Arugula',
+     'Asparagus',
+     'Broccoli',
+     'Garlic Scrapes',
+     'Pac Choi',
+     'Peas',
+     'Radishes',
+     'Spinach',
+     'Sorrel',
+     'Swiss Chard',
+     'Tapestry Salad',
+     'Basil',
+     'Beans',
+     'Carrots',
+     'Edamame',
+     'Eggplant',
+     'Green Garlic',
+     'Green Peppers',
+     'Kohlrabi',
+     'Okra',
+     'Tomatoes',
+     'Beets',
+     'Cabbage',
+     'Leeks',
+     'Onions',
+     'Peppers',
+     'Shallots',
+     'Sunchokes',
+     'Kale',
+     'Sweet Potatoes',
+     'Turnips'
+    ]
+  end
+
+  def valid_add_ons
+    [
+        'Eggs',
+        'Honey',
+        'Milk'
+    ]
+  end
 end

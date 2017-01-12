@@ -81,7 +81,20 @@
             </div>
           </div>
 
-          <%= f.submit class: 'btn btn-md btn-primary' %>
+        <div id="addons">
+          <%= f.fields_for :add_ons do |a| %>
+              <%= render 'add_on_fields', f: a %>
+              <hr>
+          <% end %>
+
+
+          <div class="links">
+            <%= link_to_add_association 'Add Add On', f, :add_ons, class: "btn btn-info" %>
+          </div>
+        </div>
+
+
+        <%= f.submit class: 'btn btn-md btn-primary' %>
 
 
       <% end %>
