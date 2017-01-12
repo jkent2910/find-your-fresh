@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 ruby '2.3.3'
 
+gem 'aws-sdk-v1'
+gem 'aws-sdk', '~> 2'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'devise'
@@ -9,6 +11,7 @@ gem 'faker'
 gem 'font-awesome-rails', "~> 4.7"
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
+gem 'paperclip', '4.3.1'
 gem 'pg'
 gem 'rails', '4.2.3'
 gem 'sass-rails', '~> 5.0'

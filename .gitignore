@@ -21,3 +21,6 @@
 
 # Ignore byebug history
 .byebug_history
+
+# Ignore local_env
+config/local_env.yml
