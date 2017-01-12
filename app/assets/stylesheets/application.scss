@@ -17,3 +17,92 @@
 @import "font-awesome";
 @import "bootstrap-datepicker3";
 @import "jquery-ui";
+
+body { padding-top: 70px; }
+
+.homepage-hero-module {
+  border-right: none;
+  border-left: none;
+}
+.no-video .video-container video,
+.touch .video-container video {
+  display: none;
+}
+.no-video .video-container .poster,
+.touch .video-container .poster {
+  display: block !important;
+}
+.video-container {
+  bottom: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: white;
+}
+.video-container .poster img {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+.video-container .filter {
+  z-index: 100;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.4);
+  width: 100%;
+}
+.video-container video {
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+}
+.video-container video.fillWidth {
+  width: 100%;
+}
+
+.navbar-custom-style {
+  background-color: white;
+  color: #319f52;
+  border-radius: 0px;
+}
+
+.navbar-font {
+  color: #319f52 !important;
+}
+
+.featurette-divider {
+  margin: 80px 0;
+}
+
+.featurette-heading {
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.featurette {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.primary-color {
+  color: #319f52;
+}
+
+.steps-badge {
+  font-size: initial !important;
+  color: #319f52 !important;
+  background-color: #ffffff !important;
+  border: 1px solid;
+  border-radius: 100px !important;
+  padding: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
+.dashboard-icon {
+  font-size: 96px;
+  padding: 25px;
+  color: #319f52;
+}
+>>>>>>> welcome page
