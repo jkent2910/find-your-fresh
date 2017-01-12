@@ -23,7 +23,8 @@ def create_farm_profile(user_id)
   farm = Farm.create!(user_id: user_id, website_url: Faker::Internet.url, name: Faker::Company.name,
                           year_founded: [1900..2017].sample, contact_phone: Faker::PhoneNumber.phone_number,
                           street_address: Faker::Address.street_address, city: Faker::Address.city, contact_email: Faker::Internet.email,
-                          state: Faker::Address.state, zipcode: Faker::Address.zip, description: Faker::Lorem.paragraph(2))
+                          state: Faker::Address.state, zipcode: Faker::Address.zip, description: Faker::Lorem.paragraph(2),
+                          latitude: 41.977880, longitude: -91.665)
 
   p "creating farm #{farm.name}"
   create_csa_share(farm.id)

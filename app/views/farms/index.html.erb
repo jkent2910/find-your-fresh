@@ -1,4 +1,23 @@
 <div class="container">
+
+  <%= search_form_for @q do |f| %>
+      <div class="col-md-12"><h4>Date</h4>
+        <%= f.search_field :shares_start_date_eq, class: 'form-control datepicker' %></div>
+
+      <div class="col-md-12"><h4>City or State</h4>
+        <%= f.search_field :city_or_state_or_zipcode_cont, class: 'form-control', placeholder: request.location.city rescue "City or State" %>
+      </div>
+
+      <div class="col-md-12">
+        <h4>Specifc Location</h4>
+        Mile Radius <%= text_field_tag :miles, params[:miles], class: 'form-control' %> From <%= text_field_tag :zipcode, params[:zipcode], class: 'form-control', placeholder: 'Zipcode' %>
+      </div>
+
+      <div class="col-md-12 text-center" style="padding: 25px;">
+        <%= f.submit "Search", class: 'btn btn-lg btn-primary' %>
+      </div>
+  <% end %>
+
   <% @farms.each do |f| %> <br />
       <%= link_to f.name, farm_path(f) %>
   <% end %>

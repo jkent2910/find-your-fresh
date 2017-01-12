@@ -5,7 +5,37 @@ class FarmsController < ApplicationController
   before_action :ensure_farm_ownership, only: [:edit, :update, :destroy]
 
   def index
-    @farms = Farm.all
+    @location_search_results = []
+
+    unless params[:q].nil?
+      params[:q].delete(:organic_true) if params[:q][:organic_true] == '0'
+      params[:q].delete(:taking_orders_true) if params[:q][:taking_orders_true] == '0'
+
+      if params[:q][:start_date_eq].present?
+        params[:q][:start_date_eq].to_date.strftime("%Y-%m-%d")
+      end
+
+      if params[:miles].present? && params[:zipcode].blank?
+        redirect_to farms_path, notice: "To search by location, you must enter both a zipcode and mile radius"
+      elsif params[:zipcode].present? && params[:miles].blank?
+        params[:miles] = 0
+        @location_search_results = Farm.near(params[:zipcode], params[:miles])
+      elsif params[:miles].present? && params[:zipcode].present?
+        @location_search_results = Farm.near(params[:zipcode], params[:miles])
+      end
+    end
+
+    @q = Farm.ransack(params[:q])
+
+    if @location_search_results.empty? && params[:miles].present? && params[:zipcode].present?
+      @farms = []
+    else
+      if @location_search_results.empty?
+        @farms = @q.result
+      else
+        @farms = @q.result.merge(@location_search_results)
+      end
+    end
   end
 
   def show

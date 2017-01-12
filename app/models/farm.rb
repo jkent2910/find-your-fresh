@@ -11,4 +11,11 @@ class Farm < ActiveRecord::Base
   has_many :add_ons, :dependent => :destroy
   accepts_nested_attributes_for :add_ons, reject_if: :all_blank, allow_destroy: true
 
+  geocoded_by :address
+  after_validation :geocode
+
+  def address
+    [street_address, city, state, zipcode, "United States"].compact.join(', ')
+  end
+
 end
