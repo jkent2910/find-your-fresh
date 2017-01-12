@@ -20,6 +20,11 @@ class FarmsController < ApplicationController
     @farm.user = current_user
 
     if @farm.save
+      if params[:images]
+        params[:images].each { |image|
+          @farm.farm_photos.create(image: image)
+        }
+      end
       redirect_to farm_path(@farm), notice: "Farm created!"
     end
   end
@@ -28,6 +33,21 @@ class FarmsController < ApplicationController
   end
 
   def update
+    respond_to do |format|
+      if @farm.update(farm_params)
+
+        if params[:images]
+          params[:images].each { |image|
+            @farm.farm_photos.create(image: image)
+          }
+        end
+
+
+        format.html { redirect_to farm_path(@farm), notice: "Farm updated" }
+      else
+        format.html { render :edit }
+      end
+    end
   end
 
   def destroy

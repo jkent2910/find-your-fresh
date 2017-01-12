@@ -8,4 +8,15 @@
   <%= @farm.website_url %><br />
   <%= @farm.contact_email %><br />
   <%= @farm.contact_phone %><br />
+
+  <% @farm.farm_photos.each do |photo| %>
+      <div class="row">
+        <div class="col-xs-12 col-md-12">
+
+          <%= image_tag(photo.image(:medium)) %>
+          <hr>
+
+        </div>
+      </div>
+  <% end %>
 </div>
