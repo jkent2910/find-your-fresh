@@ -16,13 +16,24 @@ class FarmsController < ApplicationController
       end
 
       if params[:miles].present? && params[:zipcode].blank?
-        redirect_to farms_path, notice: "To search by location, you must enter both a zipcode and mile radius"
+        redirect_to farms_path, notice: "To search by location, you must enter both a zipcode and a mile radius"
       elsif params[:zipcode].present? && params[:miles].blank?
-        params[:miles] = 0
-        @location_search_results = Farm.near(params[:zipcode], params[:miles])
+        if !/^[A-z]/.match(params[:zipcode]).nil?
+          redirect_to farms_path, notice: "You must enter a valid zipcode"
+        else
+          params[:miles] = 0
+          @location_search_results = Farm.near(params[:zipcode], params[:miles])
+        end
       elsif params[:miles].present? && params[:zipcode].present?
-        @location_search_results = Farm.near(params[:zipcode], params[:miles])
+        if !/^[A-z]/.match(params[:zipcode]).nil?
+          redirect_to farms_path, notice: "You must enter a valid zipcode"
+        elsif !/^[A-z]/.match(params[:miles]).nil?
+          redirect_to farms_path, notice: "You must enter a valid number of miles"
+        else
+          @location_search_results = Farm.near(params[:zipcode], params[:miles])
+        end
       end
+
     end
 
     @q = Farm.ransack(params[:q])
