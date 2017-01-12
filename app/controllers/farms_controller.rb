@@ -75,7 +75,8 @@ class FarmsController < ApplicationController
 
   def farm_params
     params.require(:farm).permit(:name, :street_address, :city, :state, :zipcode, :description, :year_founded,
-                                  :website_url, :contact_email, :contact_phone)
+                                  :website_url, :contact_email, :contact_phone, shares_attributes: [:id, :season,
+                                  :start_date, :end_date, :weeks, :price, :description, :num_shares, :organic, :taking_orders])
   end
 
 end

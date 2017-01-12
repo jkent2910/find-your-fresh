@@ -69,6 +69,18 @@
             </div>
           </div>
 
+          <div id="shares">
+            <%= f.fields_for :shares do |s| %>
+                <%= render 'share_fields', f: s %>
+                <hr>
+            <% end %>
+
+
+            <div class="links">
+              <%= link_to_add_association 'Add New CSA Share', f, :shares, class: "btn btn-info" %>
+            </div>
+          </div>
+
           <%= f.submit class: 'btn btn-md btn-primary' %>
 
 

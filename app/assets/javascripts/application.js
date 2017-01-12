@@ -11,6 +11,26 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
+//= require cocoon
 //= require turbolinks
+
+$(document).ready(function() {
+
+    $('.datepicker').datepicker({
+        format: 'yyyy/mm/dd',
+        startDate: '3d'
+    });
+
+    $('#shares').on('cocoon:after-insert', function(e, insertedItem) {
+        $('.datepicker').datepicker({
+            format: 'yyyy/mm/dd',
+            startDate: '3d'
+        });
+    });
+
+});
