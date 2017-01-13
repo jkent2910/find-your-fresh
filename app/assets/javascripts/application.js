@@ -35,6 +35,8 @@ $( document ).ready(function() {
         });
     });
 
+    get_slider();
+
     scaleVideoContainer();
 
     initBannerVideoSize('.video-container .poster img');
@@ -94,4 +96,23 @@ function scaleBannerVideoSize(element){
         $('.homepage-hero-module .video-container video').addClass('fadeIn animated');
 
     });
+}
+
+function get_slider() {
+    $("#the_slider").slider({
+        range: true,
+        min: 100,
+        max: 700,
+        values: [200, 500],
+        slide: function(event, ui) {
+            $('#amount').val( "$" + ui.values[0] + " - $" + ui.values[1] );
+            $('#shares_price_gteq').val(ui.values[0]);
+            $('#shares_price_lteq').val(ui.values[1]);
+        }
+    });
+
+    $('#amount').val("$" + $('#the_slider').slider("values", 0) + " - $" + $('#the_slider').slider("values", 1));
+    $( "#the_slider" ).css('background', '#a393bf');
+    $("#the_slider .ui-slider-range" ).css('background', '#a393bf');
+    $("#the_slider .ui-slider-handle").css("background", 'white');
 }

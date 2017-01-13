@@ -1,8 +1,8 @@
 <div class="container">
 
   <%= search_form_for @q do |f| %>
-      <div class="col-md-12"><h4>Date</h4>
-        <%= f.search_field :shares_start_date_eq, class: 'form-control datepicker' %></div>
+      <div class="col-md-12"><h4>Starts Before</h4>
+        <%= f.search_field :shares_start_date_lteq, class: 'form-control datepicker' %></div>
 
       <div class="col-md-12"><h4>City or State</h4>
         <%= f.search_field :city_or_state_or_zipcode_cont, class: 'form-control', placeholder: request.location.city rescue "City or State" %>
@@ -12,6 +12,31 @@
         <h4>Specifc Location</h4>
         Mile Radius <%= text_field_tag :miles, params[:miles], class: 'form-control' %> From <%= text_field_tag :zipcode, params[:zipcode], class: 'form-control', placeholder: 'Zipcode' %>
       </div>
+
+      <div class="col-md-12">
+        <%= f.check_box :shares_organic_true %>Organic?
+      </div>
+
+      <div class="col-md-12">
+        <%= f.check_box :shares_taking_orders_true %>Taking Orders?
+      </div>
+
+      <div class="col-md-12"><h4>Season</h4>
+        <%= f.select :shares_season_cont, Share::VALID_SEASONS, {include_blank: true}, class: 'form-control' %>
+      </div>
+
+      <div class="col-md-12"><h4>Price Range</h4>
+        <div id="the_slider"></div>
+        <input type="text" id="amount" readonly style="border:0; color:black; font-weight:bold;">
+        <%= f.hidden_field :shares_price_gteq %>
+        <%= f.hidden_field :shares_price_lteq %>
+      </div>
+
+      <h4>Add Ons</h4>
+      <div class="col-md-12">
+        <%= f.select :add_ons_item_eq, valid_add_ons, {include_blank: true}, class: 'form-control' %>
+      </div>
+
 
       <div class="col-md-12 text-center" style="padding: 25px;">
         <%= f.submit "Search", class: 'btn btn-lg btn-primary' %>
