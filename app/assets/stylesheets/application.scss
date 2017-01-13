@@ -71,6 +71,10 @@ body { padding-top: 70px; }
   color: #319f52 !important;
 }
 
+.navbar-shadow {
+  border-bottom: 4px solid rgba(119, 119, 119, 0.56);
+}
+
 .featurette-divider {
   margin: 80px 0;
 }
@@ -90,6 +94,12 @@ body { padding-top: 70px; }
   color: #319f52;
 }
 
+.btn-primary-invert {
+  color: #319f52;
+  background-color: #fff;
+  border-color: #319f52;
+}
+
 .steps-badge {
   font-size: initial !important;
   color: #319f52 !important;
@@ -101,8 +111,25 @@ body { padding-top: 70px; }
   padding-right: 15px !important;
 }
 
+.steps-badge-invert {
+  font-size: initial !important;
+  color: #ffffff !important;
+  background-color: #319f52 !important;
+  border: 1px solid;
+  border-radius: 100px !important;
+  padding: 10px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+
 .dashboard-icon {
   font-size: 96px;
   padding: 25px;
   color: #319f52;
+}
+
+.btn-danger-invert {
+  color: #d9534f;
+  background-color: #ffffff;
+  border-color: #ffffff;
 }

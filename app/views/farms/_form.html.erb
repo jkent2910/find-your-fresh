@@ -1,102 +1,146 @@
-<div class="container">
-  <div class="col-md-12">
-      <%= form_for (@farm), :html => {multipart: true} do |f| %>
+<div class="col-md-12">
+  <%= form_for (@farm), :html => {multipart: true} do |f| %>
 
-          <% if @farm.errors.any? %>
-              <ul>
+      <% if @farm.errors.any? %>
+          <ul>
 
-                <% @farm.errors.full_messages.each do |m| %>
-                    <li><%= m %></li>
-                <% end %>
-              </ul>
-
-          <% end %>
-
-          <div class="form-group">
-            <%= f.label :name %><br/>
-            <%= f.text_field :name, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :street_address %><br/>
-            <%= f.text_field :street_address, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :city %><br/>
-            <%= f.text_field :city, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :state %><br/>
-            <%= f.select :state, options_for_select(us_states, selected: f.object.state), {include_blank: true}, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :zipcode %><br/>
-            <%= f.text_field :zipcode, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :description %><br/>
-            <%= f.text_area :description, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :year_founded %><br/>
-            <%= f.select :year_founded, options_for_select(1900..2017, selected: f.object.year_founded), {include_blank: true}, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :website_url %><br/>
-            <%= f.text_field :website_url, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :contact_email %><br/>
-            <%= f.text_field :contact_email, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :contact_phone %><br/>
-            <%= f.text_field :contact_phone, class: "form-control" %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :pictures, :class => 'control-label' %>
-            <div class="controls">
-              <%= file_field_tag "images[]", type: :file, multiple: true %>
-            </div>
-          </div>
-
-          <div id="shares">
-            <%= f.fields_for :shares do |s| %>
-                <%= render 'share_fields', f: s %>
-                <hr>
+            <% @farm.errors.full_messages.each do |m| %>
+                <li><%= m %></li>
             <% end %>
-
-
-            <div class="links">
-              <%= link_to_add_association 'Add New CSA Share', f, :shares, class: "btn btn-info" %>
-            </div>
-          </div>
-
-        <div id="addons">
-          <%= f.fields_for :add_ons do |a| %>
-              <%= render 'add_on_fields', f: a %>
-              <hr>
-          <% end %>
-
-
-          <div class="links">
-            <%= link_to_add_association 'Add Add On', f, :add_ons, class: "btn btn-info" %>
-          </div>
-        </div>
-
-
-        <%= f.submit class: 'btn btn-md btn-primary' %>
-
+          </ul>
 
       <% end %>
-  </div>
+
+      <div class="header text-center">
+        <h3 class="primary-color"><span class="steps-badge">1</span> Add Details
+          <small> about the farm</small>
+        </h3>
+      </div>
+      <br>
+
+      <div class="form-group">
+        <%= f.label :name %><br/>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :street_address %><br/>
+        <%= f.text_field :street_address, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :city %><br/>
+        <%= f.text_field :city, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :state %><br/>
+        <%= f.select :state, options_for_select(us_states, selected: f.object.state), {include_blank: true}, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :zipcode %><br/>
+        <%= f.text_field :zipcode, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description %><br/>
+        <%= f.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :year_founded %><br/>
+        <%= f.select :year_founded, options_for_select(1900..2017, selected: f.object.year_founded), {include_blank: true}, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :website_url %><br/>
+        <%= f.text_field :website_url, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :contact_email %><br/>
+        <%= f.text_field :contact_email, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :contact_phone %><br/>
+        <%= f.text_field :contact_phone, class: "form-control" %>
+      </div>
+
+      <br>
+      <div class="header text-center">
+        <h3 class="primary-color"><span class="steps-badge">2</span> Add photos
+          <small> of your farm and food</small>
+        </h3>
+      </div>
+      <br>
+      <br>
+
+      <div class="col-md-offset-4">
+        <div class="form-group">
+          <div class="controls">
+            <%= file_field_tag "images[]", type: :file, multiple: true %>
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="header">
+        <h3 class="primary-color text-center"><span class="steps-badge">3</span> Add a CSA Share
+          <small> your farm offers</small>
+        </h3>
+      </div>
+      <br>
+      <br>
+
+      <div id="shares">
+        <%= f.fields_for :shares do |s| %>
+            <%= render 'share_fields', f: s %>
+            <hr>
+        <% end %>
+
+
+        <div class="links text-center">
+          <%= link_to_add_association 'Add New CSA Share', f, :shares, class: "btn btn-primary-invert" %>
+        </div>
+      </div>
+
+      <br>
+      <div class="header">
+        <h3 class="primary-color text-center">
+          <small>Optional</small>
+          Add an Add On
+        </h3>
+      </div>
+      <br>
+
+      <div id="addons">
+        <%= f.fields_for :add_ons do |a| %>
+            <%= render 'add_on_fields', f: a %>
+            <hr>
+        <% end %>
+
+
+        <div class="links text-center">
+          <%= link_to_add_association 'Add New Add On', f, :add_ons, class: "btn btn-primary-invert" %>
+        </div>
+      </div>
+
+      <br>
+      <br>
+      <br>
+      <div class="header text-center">
+
+        <div class="text-center">
+          <%= f.submit class: 'btn btn-md btn-success' %>
+        </div>
+        <br>
+        <br>
+        <h3 class="primary-color"><span class="steps-badge-invert"><%= fa_icon('trophy') %></span> Create Your Farm</h3>
+
+      </div>
+
+
+  <% end %>
 </div>

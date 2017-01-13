@@ -1,4 +1,31 @@
 <div class="container">
-  <h2>New Farm</h2>
-  <%= render 'form' %>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="page-header">
+        <h2 class="primary-color">Adding Your Farm
+          <small> as simple as 1-2-3</small>
+        </h2>
+      </div>
+      <div class="col-md-7 col-md-push-5">
+        <%= render 'form' %>
+      </div>
+      <div class="col-md-5 col-md-pull-7">
+        <a class="thumbnail">
+          <%= image_tag("vegetables.jpg") %>
+        </a>
+        <a class="thumbnail">
+          <%= image_tag("child-eating-watermelon.jpg") %>
+        </a>
+        <a class="thumbnail">
+          <%= image_tag("vegetable-basket.jpg") %>
+        </a>
+        <a class="thumbnail">
+          <%= image_tag("farm-review.jpg") %>
+        </a>
+        <a class="thumbnail">
+          <%= image_tag("family-eating-fresh.jpg") %>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

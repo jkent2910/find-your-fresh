@@ -2,12 +2,12 @@
 <html>
 <head>
   <title>FindYourFresh</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;">
+<nav class="navbar navbar-default navbar-fixed-top navbar-shadow">
   <div class="container-fluid navbar-font">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -26,10 +26,11 @@
         <li role="presentation" class="enabled"><a href="#">Find Food</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">About</a></li>
         <li>
-          <button type="button" class="btn btn-default navbar-btn">Sign up</button>
-          <button type="button" class="btn btn-default navbar-btn">Sign in</button>
+          <%= link_to "Sign up", new_user_registration_path, class: "primary-color" %>
+        </li>
+        <li>
+          <button type="button" class="btn btn-success navbar-btn">Sign in</button>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
