@@ -113,7 +113,8 @@ function get_slider() {
     });
 
     $('#amount').val("$" + $('#the_slider').slider("values", 0) + " - $" + $('#the_slider').slider("values", 1));
-    $( "#the_slider" ).css('background', '#a393bf');
-    $("#the_slider .ui-slider-range" ).css('background', '#a393bf');
-    $("#the_slider .ui-slider-handle").css("background", 'white');
+    $( "#the_slider" ).css('background', '#319f52');
+    $("#the_slider .ui-slider-range" ).css('background', '#319f52');
+    $("#the_slider .ui-slider-handle").css('background', 'white');
+    $("#the_slider .ui-slider-handle").css('border', '1px solid gray');
 }

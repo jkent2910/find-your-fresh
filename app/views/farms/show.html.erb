@@ -167,9 +167,9 @@
             <div class="page-header">
               <h4 class="primary-color text-left">Photos</h4>
             </div>
-            <div>
+            <div class="text-left" style="padding:13px;">
               <% @farm.farm_photos.each do |photo| %>
-                  <%= image_tag(photo.image(:thumb), data: { action: 'zoom' }) %>
+                    <%= image_tag(photo.image(:thumb), data: { action: 'zoom' }) %>
               <% end %>
             </div>
           </div>
