@@ -1,41 +1,157 @@
 <div class="container">
-  <%= @farm.name %><br />
-  <%= @farm.street_address %><br />
-  <%= @farm.city %>, <%= @farm.state %> <%= @farm.zipcode %><br />
+  <div class="row">
 
-  <%= @farm.description %><br />
-  <%= @farm.year_founded %><br />
-  <%= @farm.website_url %><br />
-  <%= @farm.contact_email %><br />
-  <%= @farm.contact_phone %><br />
+    <!-- COLUMN LEFT -->
+    <div class="col-md-3">
+      <a class="thumbnail">
+        <%= image_tag(@farm.farm_photos.last.image(:medium)) %>
+        <div class="caption">
+          <h3 class="primary-color"><%= @farm.name %></h3>
+          <% unless @farm.city.empty? %>
+              <p><%= @farm.city %>, <%= @farm.state %></p>
+          <% end %>
 
-  <% @farm.farm_photos.each do |photo| %>
-      <div class="row">
-        <div class="col-xs-12 col-md-12">
+          <% unless @farm.year_founded.empty? %>
+              <p>Founded in <span class="primary-color"><%= @farm.year_founded %></span></p>
+          <% end %>
+          <% @farm.shares.each do |share| %>
+              <br>
+              <div class="text-center">
 
-          <%= image_tag(photo.image(:medium)) %>
-          <hr>
-
+                <table class="table table-hover" style="margin-bottom: 0px;">
+                  <tr>
+                    <td>Organic</td>
+                    <td>Taking Orders</td>
+                    <td>Price</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <% if share.organic == true %>
+                          <%= fa_icon('check', class: 'primary-color') %>
+                      <% else %>
+                          <%= fa_icon('times', class: 'text-muted') %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <% if share.taking_orders == true %>
+                          <%= fa_icon('check', class: 'primary-color') %>
+                      <% else %>
+                          <%= fa_icon('times', class: 'text-muted') %>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= share.price %>
+                    </td>
+                  </tr>
+                </table>
+                <div class="text-left">
+                  <small><span class="text-muted">Share Contents:</span>
+                    <% share.vegetables.each do |v| %>
+                        <span class="primary-color"><%= v %> </span>
+                    <% end %>
+                  </small>
+                </div>
+              </div>
+          <% end %>
         </div>
-      </div>
-  <% end %>
+      </a>
 
-  <% @farm.shares.each do |share| %>
-  <%= share.season %><br />
-  <%= share.start_date %><br />
-  <%= share.end_date %><br />
-  <%= share.weeks %><br />
-  <%= share.price %><br />
-  <%= share.description %><br />
-  <%= share.num_shares %><br />
-  <%= share.organic %><br />
-  <%= share.taking_orders %><br />
-  <%= share.vegetables %><br />
-  <% end %>
+      <a class="thumbnail">
+        <div class="caption">
+          <address style="margin-bottom: 0px;">
+            <strong class="primary-color"><%= @farm.name %></strong><br>
+            <%= @farm.street_address %><br>
+            <%= @farm.city %>, <%= @farm.state %> <%= @farm.zipcode %><br>
+            <abbr title="Phone"><%= fa_icon('phone', class: 'primary-color') %></abbr> <%= @farm.contact_phone %><br>
+            <span><%= fa_icon('globe', class: 'primary-color') %> </span> <%= @farm.website_url %><br/>
+            <span><%= fa_icon('envelope-o', class: 'primary-color') %> </span><span href="mailto:#"><%= @farm.contact_email %></span>
+          </address>
+        </div>
+      </a>
 
-  <% @farm.add_ons.each do |a| %>
-    <%= a.item %> <br />
-    <%= a.price %> <br />
-    <%= a.description %>
-  <% end %>
+    </div>
+
+    <!-- COLUMN MIDDLE -->
+    <div class="col-md-6">
+      <% @farm.shares.each do |share| %>
+          <a class="thumbnail" style="padding:20px;">
+            <div class="page-header">
+              <h4 class="pull-right text-muted"><%= share.price %></h4>
+              <h3 class="primary-color">Share
+                <small>details</small>
+              </h3>
+            </div>
+            <h5 class="text-muted">Vegetables Count</h5>
+            <ol>
+              <h2 class="primary-color"><%= share.vegetables.count %>
+                <small><span class="text-muted" style="margin-left:10px;">Share Contents:</span>
+                  <% share.vegetables.each do |v| %>
+                      <span class="primary-color"><%= v %> </span>
+                  <% end %></small>
+              </h2>
+              <br>
+              <p class="text-muted"><%= share.description %></p></ol>
+            <ol>
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <tr>
+                    <th class="text-muted text-left">Organic</th>
+                    <th class="text-muted text-center">Taking Orders</th>
+                    <th class="text-muted text-center">Total Shares</th>
+                    <th class="text-muted text-center">Season</th>
+                    <th class="text-muted text-right">Weeks</th>
+                  </tr>
+                  <tr>
+                    <td>
+                      <% if share.organic == true %>
+                          <%= fa_icon('check', class: 'primary-color') %>
+                      <% else %>
+                          <%= fa_icon('times', class: 'text-muted') %>
+                      <% end %>
+                    </td>
+                    <td class="text-center">
+                      <% if share.taking_orders == true %>
+                          <%= fa_icon('check', class: 'primary-color') %>
+                      <% else %>
+                          <%= fa_icon('times', class: 'text-muted') %>
+                      <% end %>
+                    </td>
+                    <td class="text-center primary-color">
+                      <%= share.num_shares %>
+                    </td>
+                    <td class="text-center primary-color">
+                      <%= share.season %>
+                    </td>
+                    <td class="text-right primary-color">
+                      <%= share.weeks %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </ol>
+            <ol>
+              <%= fa_icon('calendar', class: 'primary-color', style: 'font-size: 20px;') %>
+              <span class="text-muted" style="margin-left:10px;"> <%= share.start_date %> - <%= share.end_date %>
+                (<%= share.weeks %> weeks)</span>
+            </ol>
+
+          </a>
+      <% end %>
+    </div>
+
+    <!-- COLUMN RIGHT -->
+    <% unless @farm.description.empty? %>
+        <div class="col-md-3">
+          <a class="thumbnail" style="padding:15px;">
+            <p class="text-muted"><span class="primary-color">Farm Description: </span> <%= @farm.description %></p>
+
+
+          </a>
+        </div>
+    <% end %>
+
+
+    <!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===--->
+
+  </div>
 </div>

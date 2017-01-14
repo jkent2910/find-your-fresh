@@ -71,7 +71,9 @@ body { padding-top: 70px; }
   color: #319f52 !important;
 }
 
-.navbar-shadow {
+.navbar-color {
+  background-color: white;
+  color: #319f52;
   border-bottom: 4px solid rgba(119, 119, 119, 0.56);
 }
 
@@ -133,3 +135,4 @@ body { padding-top: 70px; }
   background-color: #ffffff;
   border-color: #ffffff;
 }
+
