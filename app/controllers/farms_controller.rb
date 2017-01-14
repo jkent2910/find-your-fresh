@@ -7,9 +7,11 @@ class FarmsController < ApplicationController
   def index
     @location_search_results = []
 
+    @pickup_location_search_results = []
+
     unless params[:q].nil?
-      params[:q].delete(:organic_true) if params[:q][:organic_true] == '0'
-      params[:q].delete(:taking_orders_true) if params[:q][:taking_orders_true] == '0'
+      params[:q].delete(:shares_organic_true) if params[:q][:shares_organic_true] == '0'
+      params[:q].delete(:shares_taking_orders_true) if params[:q][:shares_taking_orders_true] == '0'
 
       if params[:q][:start_date_eq].present?
         params[:q][:start_date_eq].to_date.strftime("%Y-%m-%d")
@@ -34,17 +36,50 @@ class FarmsController < ApplicationController
         end
       end
 
+      if params[:pickup_miles].present? && params[:pickup_zipcode].blank?
+        redirect_to farms_path, notice: "To search by location, you must enter both a zipcode and a mile radius"
+      elsif params[:pickup_zipcode].present? && params[:pickup_miles].blank?
+        if !/^[A-z]/.match(params[:pickup_zipcode]).nil?
+          redirect_to farms_path, notice: "You must enter a valid zipcode"
+        else
+          params[:pickup_miles] = 0
+          location_results = Location.near(params[:pickup_zipcode], params[:pickup_miles])
+          location_results.each do |l|
+            share = Share.find(l.share_id)
+            @pickup_location_search_results << Farm.find(share.farm_id)
+          end
+        end
+      elsif params[:pickup_miles].present? && params[:pickup_zipcode].present?
+        if !/^[A-z]/.match(params[:pickup_zipcode]).nil?
+          redirect_to farms_path, notice: "You must enter a valid zipcode"
+        elsif !/^[A-z]/.match(params[:pickup_miles]).nil?
+          redirect_to farms_path, notice: "You must enter a valid number of miles"
+        else
+          location_results = Location.near(params[:pickup_zipcode], params[:pickup_miles])
+          location_results.each do |l|
+            share = Share.find(l.share_id)
+            @pickup_location_search_results << Farm.find(share.farm_id)
+          end
+        end
+      end
+
     end
 
     @q = Farm.ransack(params[:q])
 
     if @location_search_results.empty? && params[:miles].present? && params[:zipcode].present?
       @farms = []
+    elsif @pickup_location_search_results.empty? && params[:pickup_miles].present? && params[:pickup_zipcode].present?
+      @farms = []
     else
-      if @location_search_results.empty?
+      if @location_search_results.empty? && @pickup_location_search_results.empty?
         @farms = @q.result
-      else
-        @farms = @q.result.merge(@location_search_results)
+      elsif !@location_search_results.empty? && @pickup_location_search_results.empty?
+        @farms = @q.result.joins(:locations).merge(@location_search_results)
+      elsif @location_search_results.empty? && !@pickup_location_search_results.empty?
+        @farms = @q.result.joins(:shares).merge(@pickup_location_search_results)
+      elsif !@location_search_results.empty? && !@pickup_location_search_results.empty?
+        @farms = @q.result.joins(:locations).merge(@pickup_location_search_results).merge(@location_search_results)
       end
     end
   end

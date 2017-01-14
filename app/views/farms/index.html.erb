@@ -37,6 +37,15 @@
         <%= f.select :add_ons_item_eq, valid_add_ons, {include_blank: true}, class: 'form-control' %>
       </div>
 
+      <h4>Pick-up Locations</h4>
+      <div class="col-md-12"><h4>City or State</h4>
+        <%= f.search_field :shares_locations_city_or_state_or_zipcode_cont, class: 'form-control', placeholder: request.location.city rescue "City or State" %>
+      </div>
+
+      <div class="col-md-12">
+        <h4>Specifc Location</h4>
+        Mile Radius <%= text_field_tag :pickup_miles, params[:pickup_miles], class: 'form-control' %> From <%= text_field_tag :pickup_zipcode, params[:pickup_zipcode], class: 'form-control', placeholder: 'Zipcode' %>
+      </div>
 
       <div class="col-md-12 text-center" style="padding: 25px;">
         <%= f.submit "Search", class: 'btn btn-lg btn-primary' %>
