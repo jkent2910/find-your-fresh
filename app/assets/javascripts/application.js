@@ -17,6 +17,7 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require cocoon
+//= require zoom
 //= require turbolinks
 
 //jQuery is required to run this code

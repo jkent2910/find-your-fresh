@@ -3,7 +3,7 @@
 
     <!-- COLUMN LEFT -->
     <div class="col-md-3">
-      <a class="thumbnail">
+      <div class="thumbnail">
         <%= image_tag(@farm.farm_photos.last.image(:medium)) rescue nil %>
         <div class="caption">
           <h3 class="primary-color"><%= @farm.name %></h3>
@@ -54,9 +54,9 @@
               </div>
           <% end %>
         </div>
-      </a>
+      </div>
 
-      <a class="thumbnail">
+      <div class="thumbnail">
         <div class="caption">
           <address style="margin-bottom: 0px;">
             <strong class="primary-color"><%= @farm.name %></strong><br>
@@ -67,14 +67,14 @@
             <span><%= fa_icon('envelope-o', class: 'primary-color') %> </span><span href="mailto:#"><%= @farm.contact_email %></span>
           </address>
         </div>
-      </a>
+      </div>
 
     </div>
 
     <!-- COLUMN MIDDLE -->
     <div class="col-md-6">
       <% @farm.shares.each do |share| %>
-          <a class="thumbnail" style="padding:20px;">
+          <div class="thumbnail" style="padding:20px;">
             <div class="page-header">
               <h4 class="pull-right text-muted"><%= share.price %></h4>
               <h3 class="primary-color">Share
@@ -129,13 +129,13 @@
                 </table>
               </div>
             </ol>
-            <ol>
-              <%= fa_icon('calendar', class: 'primary-color', style: 'font-size: 20px;') %>
-              <span class="text-muted" style="margin-left:10px;"> <%= share.start_date %> - <%= share.end_date %>
-                (<%= share.weeks %> weeks)</span>
+            <ol class="text-right">
+
+              <span class="text-muted" style="margin-right:10px;"> <%= share.start_date %> - <%= share.end_date %>
+                (<%= share.weeks %>
+                weeks) </span> <%= fa_icon('calendar', class: 'primary-color', style: 'font-size: 20px;') %>
             </ol>
 
-          </a>
 
           <h2>Pick-up Locations:</h2>
           <% share.locations.each do |l| %>
@@ -147,19 +147,35 @@
             Frequency: <%= l.frequency %> <br />
             Other Info: <%= l.other_info %>
           <% end %>
+          </div>
       <% end %>
     </div>
 
     <!-- COLUMN RIGHT -->
-    <% unless @farm.description.empty? %>
-        <div class="col-md-3">
-          <a class="thumbnail" style="padding:15px;">
+
+    <div class="col-md-3">
+      <% unless @farm.description.empty? %>
+          <div class="thumbnail" style="padding:15px;">
             <p class="text-muted"><span class="primary-color">Farm Description: </span> <%= @farm.description %></p>
+          </div>
+      <% end %>
 
 
-          </a>
-        </div>
-    <% end %>
+
+      <% unless @farm.farm_photos.empty? %>
+          <div class="thumbnail text-center" style="padding:15px;">
+            <div class="page-header">
+              <h4 class="primary-color text-left">Photos</h4>
+            </div>
+            <div>
+              <% @farm.farm_photos.each do |photo| %>
+                  <%= image_tag(photo.image(:thumb), data: { action: 'zoom' }) %>
+              <% end %>
+            </div>
+          </div>
+      <% end %>
+
+    </div>
 
 
     <!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===---><!---=== END ===--->
