@@ -125,7 +125,8 @@ class FarmsController < ApplicationController
     params.require(:farm).permit(:name, :street_address, :city, :state, :zipcode, :description, :year_founded,
                                   :website_url, :contact_email, :contact_phone, shares_attributes: [:id, :_destroy, :season,
                                   :start_date, :end_date, :weeks, :price, :description, :num_shares, :organic, :taking_orders,
-                                  vegetables: []], add_ons_attributes: [:id, :item, :description, :price, :_destroy])
+                                  vegetables: [], locations_attributes:[:id, :street_address, :city, :state, :zipcode, :start_time,
+                                  :end_time, :other_info, :day_of_week, :frequency, :_destroy]], add_ons_attributes: [:id, :item, :description, :price, :_destroy])
   end
 
 end

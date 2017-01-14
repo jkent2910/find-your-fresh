@@ -64,6 +64,22 @@
         <%= "#{k}" %><br/>
     <% end %>
   </div>
+
+  <div id="locations">
+    <h4>Pick-up Locations</h4>
+    <div class="links">
+      <%= link_to_add_association 'Add New Location', f, :locations, class: "btn btn-primary-invert" %>
+    </div>
+    <br/>
+    <div id="#locations">
+      <%= f.fields_for :locations do |l| %>
+          <%= render 'location_fields', f: l %>
+          <hr>
+      <% end %>
+    </div>
+    <br/>
+  </div>
+
   <div class="text-right">
     <%= link_to_remove_association "Remove CSA Share", f, class: "btn btn-danger-invert" %><%= fa_icon('times', style: 'color:red;') %><br/><br/>
   </div>

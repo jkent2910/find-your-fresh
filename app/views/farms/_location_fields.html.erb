@@ -1,0 +1,52 @@
+<div class="nested-fields">
+
+  <div class="form-group">
+    <%= f.label :street_address %><br/>
+    <%= f.text_field :street_address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :city %><br/>
+    <%= f.text_field :city, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :state %><br/>
+    <%= f.select :state, options_for_select(us_states, selected: f.object.state), {include_blank: true}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :zipcode %><br/>
+    <%= f.text_field :zipcode, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :start_time %><br/>
+    <%= f.time_select :start_time, {ampm: true} , class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :end_time %><br/>
+    <%= f.time_select :end_time, {ampm: true}, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :other_info %><br/>
+    <%= f.text_area :other_info, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :day_of_week %><br/>
+    <%= f.select :day_of_week, options_for_select(Location::VALID_DAYS), class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :frequency %><br/>
+    <%= f.text_field :frequency, class: "form-control" %>
+  </div>
+
+
+  <div class="text-right">
+    <%= link_to_remove_association "Remove Location", f, class: "btn btn-danger-invert" %><br/><br/>
+  </div>
+</div>
