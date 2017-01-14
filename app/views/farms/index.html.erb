@@ -1,12 +1,14 @@
 <div class="container">
   <div class="page-header primary-color">
-    <h1>Search for Food
-      <small> by farm</small>
+    <h1>Find Fresh Food
     </h1>
   </div>
 
   <div class="row">
     <div class="col-md-4">
+      <div class="col-md-12 header">
+        <h3 class="text-muted">Filters</h3>
+      </div>
 
       <%= search_form_for @q do |f| %>
           <div class="col-md-12">
@@ -26,11 +28,11 @@
           </div>
 
           <div class="col-md-12">
-            <%= f.check_box :shares_organic_true %>Organic?
+            <%= f.check_box :shares_organic_true %> Organic?
           </div>
 
           <div class="col-md-12">
-            <%= f.check_box :shares_taking_orders_true %>Taking Orders?
+            <%= f.check_box :shares_taking_orders_true %> Taking Orders?
           </div>
 
           <div class="col-md-12">
@@ -46,15 +48,17 @@
             <%= f.hidden_field :shares_price_lteq %>
             <input type="text" id="amount" readonly style="border:0; color:dimgray; font-weight:bold; text-align: left;">
 
-      <h4>Pick-up Locations</h4>
-      <div class="col-md-12"><h4>City or State</h4>
-        <%= f.search_field :shares_locations_city_or_state_or_zipcode_cont, class: 'form-control', placeholder: request.location.city rescue "City or State" %>
-      </div>
+            <h4 class="text-muted">Pick-up Locations</h4>
+            <div class="col-md-12">
+              <h4 class="text-muted">City or State</h4>
+              <%= f.search_field :shares_locations_city_or_state_or_zipcode_cont, class: 'form-control', placeholder: request.location.city rescue "City or State" %>
+            </div>
 
-      <div class="col-md-12">
-        <h4>Specifc Location</h4>
-        Mile Radius <%= text_field_tag :pickup_miles, params[:pickup_miles], class: 'form-control' %> From <%= text_field_tag :pickup_zipcode, params[:pickup_zipcode], class: 'form-control', placeholder: 'Zipcode' %>
-      </div>
+            <div class="col-md-12">
+              <h4 class="text-muted">Specifc Location</h4>
+              Mile Radius <%= text_field_tag :pickup_miles, params[:pickup_miles], class: 'form-control' %>
+              From <%= text_field_tag :pickup_zipcode, params[:pickup_zipcode], class: 'form-control', placeholder: 'Zipcode' %>
+            </div>
           </div>
           <br>
 
@@ -73,9 +77,67 @@
     </div>
 
     <div class="col-md-8">
+      <div class="header">
+        <h3 class="text-muted text-right">Results</h3>
+      </div>
+      <% @farms.each do |f| %>
+          <div class="row" style="border: 1px solid lightgray !important; margin-top: 5px;">
+            <div class="col-md-9 thumbnail" style="margin-bottom:0px; border:none !important;">
+              <div class="row">
+                <div class="col-md-4" style="padding-left: 23px;">
+                  <h4 class="primary-color"><%= link_to f.name, farm_path(f) %></h4>
+                  <p class="text-muted"><%= f.city %>, <%= f.state %></p>
+                  <%= link_to 'Learn more', farm_path(f), class:'btn btn-primary-invert text-center' %>
+                </div>
+                <div class="col-md-8">
+                  <% f.shares.each do |share| %>
+                      <p class="text-muted" style="padding-top: 10px;">Offering:
+                        <% share.vegetables.each do |v| %>
+                            <span class="primary-color"><%= v %></span>
 
-      <% @farms.each do |f| %> <br/>
-          <%= link_to f.name, farm_path(f) %>
+                        <% end %>
+
+                        <span class="text-muted pull-right">$<%= share.price %></span>
+                      </p>
+                  <% end %>
+                </div>
+                <% f.shares.each do |share| %>
+                    <div class="col-md-8 table-responsive">
+                      <table class="table table-hover" style="margin-bottom:0px;">
+                        <tr>
+                          <th class="text-muted text-right">Organic</th>
+                          <th class="text-muted text-center">Taking Orders</th>
+                          <th class="text-muted">Season</th>
+                          <th class="text-muted text-right">Duration</th>
+                        </tr>
+                        <tr>
+                          <td class="text-right">
+                            <% if share.organic == true %>
+                                <%= fa_icon('check', class: 'primary-color') %>
+                            <% else %>
+                                <%= fa_icon('times', class: 'text-muted') %>
+                            <% end %>
+                          </td>
+                          <td class="text-center">
+                            <% if share.taking_orders == true %>
+                                <%= fa_icon('check', class: 'primary-color') %>
+                            <% else %>
+                                <%= fa_icon('times', class: 'text-muted') %>
+                            <% end %>
+                          </td>
+                          <td class="primary-color"><%= share.season %></td>
+                          <td class="primary-color text-right"><%= share.weeks %> <small>weeks</small></td>
+                        </tr>
+                      </table>
+                    </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-md-3 thumbnail" style="margin-bottom:0px; border: none !important;">
+              <%= image_tag(f.farm_photos.last.image(:medium)) rescue nil %>
+            </div>
+
+          </div>
       <% end %>
     </div>
   </div>

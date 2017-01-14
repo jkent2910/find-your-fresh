@@ -20,7 +20,10 @@
 @import "jquery-ui/slider";
 @import "zoom";
 
-body { padding-top: 70px; }
+body {
+  padding-top: 70px;
+  background-color: #f5f8fa;
+}
 
 .homepage-hero-module {
   border-right: none;
