@@ -8,5 +8,6 @@ class User < ActiveRecord::Base
 
   validates_presence_of :user_type
 
-  has_one :farm
+  has_one :farm, :dependent => :destroy
+  has_one :profile, :dependent => :destroy
 end

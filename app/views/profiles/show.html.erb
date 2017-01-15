@@ -1,0 +1,9 @@
+<div class="container">
+  <h1><%= @profile.first_name %> <%= @profile.last_name %></h1>
+  <%= image_tag (@profile.profile_picture(:thumb)) %>
+  <%= @profile.city %>, <%= @profile.state %><br />
+
+  <%= @profile.bio %><br />
+  Looking for CSA? <%= @profile.looking_for_csa? %> <br />
+  Looking for split? <%= @profile.looking_for_split? %> <br />
+</div>
