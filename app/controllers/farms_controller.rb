@@ -96,11 +96,20 @@ class FarmsController < ApplicationController
     @farm.user = current_user
 
     if @farm.save
+
+      # Build photos
       if params[:images]
         params[:images].each { |image|
           @farm.farm_photos.create(image: image)
         }
       end
+
+      # Build vegetables
+      if params[:share][:vegetables]
+        share = Share.find(params[:share_id])
+        share.update_attributes(vegetables: params[:share][:vegetables])
+      end
+
       redirect_to farm_path(@farm), notice: "Farm created!"
     end
   end

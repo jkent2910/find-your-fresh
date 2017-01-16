@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114201552) do
+ActiveRecord::Schema.define(version: 20170115194157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,28 @@ ActiveRecord::Schema.define(version: 20170114201552) do
     t.datetime "updated_at",     null: false
     t.float    "latitude"
     t.float    "longitude"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_address"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "gender"
+    t.text     "bio"
+    t.boolean  "looking_for_split"
+    t.boolean  "looking_for_csa"
+    t.string   "profile_picture_file_name"
+    t.string   "profile_picture_content_type"
+    t.integer  "profile_picture_file_size"
+    t.datetime "profile_picture_updated_at"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "user_id"
   end
 
   create_table "shares", force: :cascade do |t|

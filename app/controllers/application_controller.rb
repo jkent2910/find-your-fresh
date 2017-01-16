@@ -13,7 +13,11 @@ class ApplicationController < ActionController::Base
         farm_path(resource.farm)
       end
     elsif resource.consumer?
-      farms_path
+      if resource.profile.nil?
+        :new_profile
+      else
+        farms_path
+      end
     end
   end
 

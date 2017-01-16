@@ -1,0 +1,80 @@
+<%= form_for(@profile) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :profile_picture %>
+      <%= f.file_field :profile_picture, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <label class="radio-inline">
+        <%= f.radio_button(:gender, "female") %>Female
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button(:gender, "male") %> Male
+      </label>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :first_name %><br/>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name %><br/>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :street_address %><br/>
+      <%= f.text_field :street_address, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city %><br/>
+      <%= f.text_field :city, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :state %><br/>
+      <%= f.select :state, options_for_select(us_states, selected: f.object.state), {include_blank: true}, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :zipcode %><br/>
+      <%= f.text_field :zipcode, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :bio %><br/>
+      <%= f.text_area :bio, class: "form-control" %>
+    </div>
+
+
+    <div class="form-group">
+      Looking to split?
+      <label class="radio-inline">
+        <%= f.radio_button(:looking_for_split, true) %>Yes
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button(:looking_for_split, false) %> No
+      </label>
+    </div>
+
+
+    <div class="form-group">
+      Looking for CSA?
+      <label class="radio-inline">
+        <%= f.radio_button(:looking_for_csa, true) %>Yes
+      </label>
+      <label class="radio-inline">
+        <%= f.radio_button(:looking_for_csa, false) %> No
+      </label>
+    </div>
+
+
+    <div class="text-center">
+      <%= f.submit class: 'btn btn-md btn-success' %>
+    </div>
+
+
+<% end %>
