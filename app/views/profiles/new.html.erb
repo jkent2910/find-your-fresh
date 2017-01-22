@@ -1,4 +1,19 @@
-<div class="container">
-  <h2>New Profile</h2>
-  <%= render 'form' %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="page-header">
+      <h2 class="primary-color">Profile
+        <small>new</small>
+      </h2>
+    </div>
+    <div class="thumbnail" style="padding:20px;">
+      <%= render 'form' %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <a class="thumbnail"><%= image_tag("vegetable-basket.jpg") %></a>
+    <a class="thumbnail"><%= image_tag("veggies.jpg") %></a>
+    <a class="thumbnail"><%= image_tag("veggies and fruits.jpg") %></a>
+
+
+  </div>
 </div>

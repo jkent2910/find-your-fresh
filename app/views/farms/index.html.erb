@@ -46,7 +46,8 @@
             <br>
             <%= f.hidden_field :shares_price_gteq %>
             <%= f.hidden_field :shares_price_lteq %>
-            <input type="text" id="amount" readonly style="border:0; color:dimgray; font-weight:bold; text-align: left;">
+            <input type="text" id="amount" readonly style="border:0; color:dimgray; font-weight:bold;text-align: center;
+                width: 100%;">
 
             <h4 class="text-muted">Pick-up Locations</h4>
             <div class="col-md-12">
@@ -81,13 +82,13 @@
         <h3 class="text-muted text-right">Results</h3>
       </div>
       <% @farms.each do |f| %>
-          <div class="row" style="border: 1px solid lightgray !important; margin-top: 5px;">
+          <div class="row" style="border: 1px solid lightgray !important; margin-top: 5px;background-color: white">
             <div class="col-md-9 thumbnail" style="margin-bottom:0px; border:none !important;">
               <div class="row">
-                <div class="col-md-4" style="padding-left: 23px;">
+                <div class="col-md-4" style="padding-left: 23px; padding-right: 0px;">
                   <h4 class="primary-color"><%= link_to f.name, farm_path(f) %></h4>
                   <p class="text-muted"><%= f.city %>, <%= f.state %></p>
-                  <%= link_to 'Learn more', farm_path(f), class:'btn btn-primary-invert text-center' %>
+                  <%= link_to 'Learn more', farm_path(f), class: 'btn btn-primary-invert text-center' %>
                 </div>
                 <div class="col-md-8">
                   <% f.shares.each do |share| %>
@@ -126,7 +127,9 @@
                             <% end %>
                           </td>
                           <td class="primary-color"><%= share.season %></td>
-                          <td class="primary-color text-right"><%= share.weeks %> <small>weeks</small></td>
+                          <td class="primary-color text-right"><%= share.weeks %>
+                            <small>weeks</small>
+                          </td>
                         </tr>
                       </table>
                     </div>
@@ -134,7 +137,11 @@
               </div>
             </div>
             <div class="col-md-3 thumbnail" style="margin-bottom:0px; border: none !important;">
-              <%= image_tag(f.farm_photos.last.image(:medium)) rescue nil %>
+              <% if f.farm_photos.last.nil? %>
+                  <%= fa_icon('leaf', class: 'primary-color no-photo-index') %>
+              <% else %>
+                  <%= image_tag(f.farm_photos.last.image(:medium)) rescue nil %>
+              <% end %>
             </div>
 
           </div>

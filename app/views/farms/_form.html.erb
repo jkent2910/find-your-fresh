@@ -1,22 +1,25 @@
-<div class="col-md-12">
-  <%= form_for (@farm), :html => {multipart: true} do |f| %>
+<%= form_for (@farm), :html => {multipart: true} do |f| %>
 
-      <% if @farm.errors.any? %>
-          <ul>
+    <% if @farm.errors.any? %>
+        <ul>
 
-            <% @farm.errors.full_messages.each do |m| %>
-                <li><%= m %></li>
-            <% end %>
-          </ul>
+          <% @farm.errors.full_messages.each do |m| %>
+              <li><%= m %></li>
+          <% end %>
+        </ul>
 
-      <% end %>
+    <% end %>
 
-      <div class="header text-center">
-        <h3 class="primary-color"><span class="steps-badge">1</span> Add Details
-          <small> about the farm</small>
-        </h3>
-      </div>
-      <br>
+
+
+    <div class="header text-center">
+      <h3 class="primary-color"><span class="steps-badge">1</span> Add Details
+        <small> about the farm</small>
+      </h3>
+    </div>
+    <br>
+
+    <div class="thumbnail" style="padding: 15px;">
 
       <div class="form-group">
         <%= f.label :name %><br/>
@@ -68,31 +71,36 @@
         <%= f.text_field :contact_phone, class: "form-control" %>
       </div>
 
-      <br>
-      <div class="header text-center">
-        <h3 class="primary-color"><span class="steps-badge">2</span> Add photos
-          <small> of your farm and food</small>
-        </h3>
-      </div>
-      <br>
-      <br>
+    </div>
 
-      <div class="col-md-offset-4">
-        <div class="form-group">
-          <div class="controls">
-            <%= file_field_tag "images[]", type: :file, multiple: true %>
-          </div>
+    <br>
+    <div class="header text-center">
+      <h3 class="primary-color"><span class="steps-badge">2</span> Add photos
+        <small> of your farm and food</small>
+      </h3>
+    </div>
+    <br>
+    <br>
+
+    <div class="col-md-offset-4">
+      <div class="form-group">
+        <div class="controls">
+          <%= file_field_tag "images[]", type: :file, multiple: true %>
         </div>
       </div>
+    </div>
 
-      <br>
-      <div class="header">
-        <h3 class="primary-color text-center"><span class="steps-badge">3</span> Add a CSA Share
-          <small> your farm offers</small>
-        </h3>
-      </div>
-      <br>
-      <br>
+    <br>
+    <div class="header">
+      <h3 class="primary-color text-center"><span class="steps-badge">3</span> Add a CSA Share
+        <small> your farm offers</small>
+      </h3>
+    </div>
+    <br>
+    <br>
+
+    <div class="thumbnail" style="padding: 15px;">
+
 
       <div id="shares">
         <%= f.fields_for :shares do |s| %>
@@ -100,20 +108,25 @@
             <hr>
         <% end %>
 
-
-        <div class="links text-center">
-          <%= link_to_add_association 'Add New CSA Share', f, :shares, class: "btn btn-primary-invert" %>
-        </div>
       </div>
 
-      <br>
-      <div class="header">
-        <h3 class="primary-color text-center">
-          <small>Optional</small>
-          Add an Add On
-        </h3>
+
+      <div class="links text-center">
+        <%= link_to_add_association 'Add New CSA Share', f, :shares, class: "btn btn-primary-invert" %>
       </div>
-      <br>
+    </div>
+
+    <br>
+    <div class="header">
+      <h3 class="primary-color text-center">
+        <small>Optional</small>
+        Add an Add On
+      </h3>
+    </div>
+    <br>
+
+    <div class="thumbnail" style="padding: 15px;">
+
 
       <div id="addons">
         <%= f.fields_for :add_ons do |a| %>
@@ -126,6 +139,8 @@
           <%= link_to_add_association 'Add New Add On', f, :add_ons, class: "btn btn-primary-invert" %>
         </div>
       </div>
+
+    </div>
 
       <br>
       <br>
@@ -140,5 +155,4 @@
 
       </div>
 
-  <% end %>
-</div>
+<% end %>
